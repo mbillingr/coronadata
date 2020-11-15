@@ -23,8 +23,18 @@ jobs:
       - uses: s-weigand/setup-conda@v1
         
       - run: conda env update --file environment.yml  --prune
+      
+      - run: jupyter nbconvert --to html --execute at-summary.ipynb
+      
+      - run: |
+          mkdir ./_build
+          mv *.html ./_build
+      
+      # Push the notebook's HTML to github-pages
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.5.9
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: python --version
         
