@@ -28,7 +28,7 @@ jobs:
       
       - run: |
           mkdir ./_build
-          mv *.html ./_build
+          mv at-summary.html ./_build/index.html
       
       # Push the notebook's HTML to github-pages
       - name: GitHub Pages action
